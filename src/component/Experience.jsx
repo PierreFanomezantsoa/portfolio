@@ -41,12 +41,12 @@ const donne = [
 
 function Experience() {
   return (
-    <div className="px-6 bg-gray-100 py-12 min-h-screen">
-        <div className='bg-gray-100 text-gray-200'>
+    <div className="  py-12 min-h-screen">
+        <div className=' text-gray-200'>
             .
         </div><br />
       <h1 className="text-3xl font-bold text-center mb-10 text-gray-800">Mon expérience professionnelle</h1>
-      <div className="p-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="p-0 sm:p-10  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-8">
         {donne.map((item, index) => (
           <div
             key={index}

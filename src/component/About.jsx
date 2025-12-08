@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import image1 from '../img/pierre.png';
+import image1 from '../img/pierre-modified.png';
+import  CV from '../img/cv.pdf';
 
-const roles = ["Développeur JS", "Développeur Java", "Développeur PHP Symfony"];
+const roles = ["Développeur JS", "Développeur Java", "Développeur PHP Symfony","Designer et concepteur"];
 
 function About() {
   const [index, setIndex] = useState(0);
@@ -19,12 +20,12 @@ function About() {
     <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 p-8 md:p-16">
       <div className="text-center md:text-left max-w-xl">
         <motion.h2
-          className="font-semibold text-2xl text-gray-800"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+          className="font-semibold text-2xl text-teal-700"
+          initial={{ opacity: 0, y: -3 }}
+          animate={{ opacity: 3, y: 0 }}
+          transition={{ duration: 6, repeat: Infinity, repeatType: 'reverse' }}
         >
-          Je suis Pierre
+          Je suis RAFANOMEZANTSOA Nandrasanarivo Pierre
         </motion.h2>
         <div className="h-12 overflow-hidden my-2">
           <AnimatePresence mode="wait">
@@ -47,7 +48,7 @@ function About() {
           n’hésite pas à y jeter un œil !
         </p><br />
        <div className='absolute'>
-  <button className='relative md:left-28 left-12 px-16 py-3
+  <button className='relative md:left-28 left-3 px-16 py-3
     text-teal-500 font-bold border-2 rounded-full
     overflow-hidden
     hover:text-white
@@ -56,15 +57,17 @@ function About() {
     before:bg-teal-500 before:scale-x-0 before:origin-left
     before:transition-transform before:duration-300
     hover:before:scale-x-100'>
-    <span className='relative z-10'>Get start</span>
+      <a href={CV} download>
+        <span className='relative z-10'>Dowanload cv</span>
+      </a>
   </button>
 </div>
       </div>
-      <div className="flex-shrink-0 border border-gray-300 rounded-xl p-4 shadow-2xl">
+      <div className="flex-shrink-0 p-4 ">
         <img 
           src={image1} 
           alt="Portrait de Pierre" 
-          className="w-64 h-auto object-contain rounded-md" 
+          className="w-64 h-auto object-contain border-none rounded-lg" 
         />
       </div>
     </div>

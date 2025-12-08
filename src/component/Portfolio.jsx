@@ -12,8 +12,10 @@ const skills = [
 
 function SkillCard({ name, level, description }) {
   return (
-    <div className="bg-gray-300 rounded-xl p-10 shadow-sm border
-     border-gray-300 hover:shadow-lg hover:border-b-4 hover:border-b-emerald-600 hover:scale-105 transition duration-300">
+    <div className="bg-gray-300 rounded-xl p-10 shadow-sm border w-full
+     border-gray-300 hover:shadow-lg hover:border-b-4
+      hover:border-b-emerald-600 hover:scale-105 
+      transition duration-300">
     
       <h3 className="text-xl font-bold text-emerald-700 mb-1">{name}</h3>
       <p className="text-sm text-gray-700 mb-3">{description}</p>
@@ -32,7 +34,7 @@ function SkillCard({ name, level, description }) {
 
 function Portfolio() {
   return (
-    <section className="p-10 md:p-10  min-h-screen">
+    <section className=" min-h-screen ">
     <div>
      <div className='bg-gray-200 text-gray-200'>
         .
@@ -42,7 +44,7 @@ function Portfolio() {
         Mes Compétences
       </h2>
      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 ">
         {skills.map((skill, idx) => (
           <SkillCard
             key={idx}
