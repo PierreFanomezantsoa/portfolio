@@ -22,7 +22,8 @@ function About() {
       <a 
         href={CV} 
         download
-        className='relative max-w-xs sm:max-w-none px-12 py-3 
+        // Ajout de w-full sur mobile pour que le bouton prenne plus de place si max-w-xs n'est pas suffisant
+        className='relative w-full sm:w-auto max-w-xs sm:max-w-none px-12 py-3 
           text-teal-500 font-bold border-2 border-teal-500 rounded-full
           overflow-hidden transition duration-300 hover:text-white group'
       >
@@ -35,7 +36,8 @@ function About() {
   );
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-20 sm:p-40 md:p-30">
+    // PADDING CORRIGÉ: p-6 (24px) sur mobile, sm:p-12 (48px) sur petit écran, md:p-16 (64px) sur desktop
+    <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-6 sm:p-12 md:p-16">
 
       {/* Colonne du Texte (order-2 sur mobile, order-1 sur desktop/md+) */}
       <div className="order-2 md:order-1 text-center md:text-left max-w-xl">
@@ -79,7 +81,6 @@ function About() {
         <motion.img 
           src={image1} 
           alt="Portrait de Pierre" 
-          // Suppression des classes blur-sm et hover:blur-none
           className="w-48 sm:w-64 h-auto object-contain rounded-full shadow-2xl border-4 border-teal-500/50 
                      transition duration-500" 
           initial={{ rotate: 10, opacity: 0, scale: 0.8 }}
