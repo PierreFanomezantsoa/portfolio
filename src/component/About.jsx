@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '../img/pierre-modified.png';
-import  CV from '../img/cv.pdf';
+import CV from '../img/cv.pdf';
 
-const roles = ["Développeur JS", "Développeur Java", "Développeur PHP Symfony","Designer et concepteur"];
+const roles = ["Développeur JS", "Développeur Java", "Développeur PHP Symfony", "Designer et concepteur"];
 
 function About() {
   const [index, setIndex] = useState(0);
@@ -16,60 +16,78 @@ function About() {
     return () => clearInterval(interval);
   }, []);
 
+  // Utilisation d'un wrapper simple pour le bouton pour un alignement responsive
+  const DownloadButton = (
+    <div className="mt-8 flex justify-center md:justify-start">
+      <a 
+        href={CV} 
+        download
+        className='relative max-w-xs sm:max-w-none px-12 py-3 
+          text-teal-500 font-bold border-2 border-teal-500 rounded-full
+          overflow-hidden transition duration-300 hover:text-white group'
+      >
+        <span className='absolute inset-0 bg-teal-500 scale-x-0 group-hover:scale-x-100 origin-left 
+          transition-transform duration-300 ease-in-out z-0'>
+        </span>
+        <span className='relative z-10'>Télécharger CV</span>
+      </a>
+    </div>
+  );
+
   return (
-    <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 p-8 md:p-16">
-      <div className="text-center md:text-left max-w-xl">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-20 sm:p-40 md:p-30">
+
+      {/* Colonne du Texte (order-2 sur mobile, order-1 sur desktop/md+) */}
+      <div className="order-2 md:order-1 text-center md:text-left max-w-xl">
         <motion.h2
-          className="font-semibold text-2xl text-teal-700"
-          initial={{ opacity: 0, y: -3 }}
-          animate={{ opacity: 3, y: 0 }}
-          transition={{ duration: 6, repeat: Infinity, repeatType: 'reverse' }}
+          className="font-semibold text-xl sm:text-2xl text-teal-700 mt-4 md:mt-0"
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
           Je suis RAFANOMEZANTSOA Nandrasanarivo Pierre
         </motion.h2>
-        <div className="h-12 overflow-hidden my-2">
+
+        {/* Animation des Rôles */}
+        <div className="h-10 sm:h-12 overflow-hidden my-2">
           <AnimatePresence mode="wait">
             <motion.h1
               key={roles[index]}
-              className="font-bold text-4xl text-gray-900"
+              className="font-bold text-3xl sm:text-4xl text-gray-900"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.5 }}
             >
               {roles[index]}
             </motion.h1>
           </AnimatePresence>
         </div>
 
-        <p className="text-lg text-gray-700 mt-4 leading-relaxed">
+        <p className="text-base sm:text-lg text-gray-700 mt-4 leading-relaxed">
           Je suis passionné par le développement logiciel, avec une forte motivation créative 
           dans le domaine des technologies et de l'informatique. Voici mon portfolio, 
           n’hésite pas à y jeter un œil !
-        </p><br />
-       <div className='absolute'>
-  <button className='relative md:left-28 left-3 px-16 py-3
-    text-teal-500 font-bold border-2 rounded-full
-    overflow-hidden
-    hover:text-white
-    hover:border-teal-500
-    before:content-[""] before:absolute before:inset-0 
-    before:bg-teal-500 before:scale-x-0 before:origin-left
-    before:transition-transform before:duration-300
-    hover:before:scale-x-100'>
-      <a href={CV} download>
-        <span className='relative z-10'>Dowanload cv</span>
-      </a>
-  </button>
-</div>
+        </p>
+
+        {/* Intégration du Bouton Télécharger CV */}
+        {DownloadButton}
       </div>
-      <div className="flex-shrink-0 p-4 ">
-        <img 
+
+      {/* Colonne de l'Image (order-1 sur mobile, order-2 sur desktop/md+) */}
+      <div className="order-1 md:order-2 flex-shrink-0 w-full flex justify-center md:block md:w-auto">
+        <motion.img 
           src={image1} 
           alt="Portrait de Pierre" 
-          className="w-64 h-auto object-contain border-none rounded-lg" 
+          // Suppression des classes blur-sm et hover:blur-none
+          className="w-48 sm:w-64 h-auto object-contain rounded-full shadow-2xl border-4 border-teal-500/50 
+                     transition duration-500" 
+          initial={{ rotate: 10, opacity: 0, scale: 0.8 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
         />
       </div>
+      
     </div>
   );
 }
