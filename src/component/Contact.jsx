@@ -1,68 +1,75 @@
 import React from 'react';
+import { Send } from 'lucide-react';
 
 function Contact() {
   return (
-    // Conteneur principal: Utilisation d'un padding horizontal plus doux pour le mobile (sm:px-6)
-    <div className="w-full py-12 px-4 sm:px-6"> 
-      {/* Conteneur du formulaire: Augmentation du padding interne pour mobile (p-6) */}
-      <div className="max-w-4xl mx-auto bg-white p-6 sm:p-8 md:p-12 rounded-xl shadow-2xl">
+    <div className="w-full py-0"> 
+      {/* Conteneur principal sans bordure, coins très arrondis */}
+      <div className="max-w-4xl mx-auto bg-slate-900/60 backdrop-blur-3xl p-8 sm:p-12 rounded-[2.5rem] shadow-2xl">
         
-        <h2 className="text-3xl font-bold text-center text-emerald-700 mb-8 sm:mb-10">Contactez-moi 📧</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Parlons de votre <span className="text-teal-400">Projet</span>
+          </h2>
+          <p className="text-slate-400 font-light text-lg">
+            Une idée, une collaboration ou simplement un coucou ?
+          </p>
+        </div>
         
-        {/* Grille : Par défaut 1 colonne (mobile), passe à 2 colonnes sur écran MD et plus */}
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Champ Nom */}
           <div className="flex flex-col">
-            <label htmlFor="nom" className="mb-2 font-semibold text-gray-700">Nom</label>
+            <label htmlFor="nom" className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Nom</label>
             <input
               type="text"
               id="nom"
-              className="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-150"
-              placeholder="Entrez votre nom"
+              className="px-6 py-4 rounded-2xl bg-slate-950/40 text-white placeholder-slate-700 focus:outline-none focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
+              placeholder="Votre nom"
             />
           </div>
 
           {/* Champ Prénom */}
           <div className="flex flex-col">
-            <label htmlFor="prenom" className="mb-2 font-semibold text-gray-700">Prénom</label>
+            <label htmlFor="prenom" className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Prénom</label>
             <input
               type="text"
               id="prenom"
-              className="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-150"
-              placeholder="Entrez votre prénom"
+              className="px-6 py-4 rounded-2xl bg-slate-950/40 text-white placeholder-slate-700 focus:outline-none focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
+              placeholder="Votre prénom"
             />
           </div>
 
-          {/* Champ Email - S'étend sur toute la largeur (col-span-1 sur mobile, md:col-span-2 sur desktop) */}
+          {/* Adresse Email */}
           <div className="flex flex-col col-span-1 md:col-span-2">
-            <label htmlFor="email" className="mb-2 font-semibold text-gray-700">Adresse Email</label>
+            <label htmlFor="email" className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Adresse Email</label>
             <input
               type="email"
               id="email"
-              className="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition duration-150"
+              className="px-6 py-4 rounded-2xl bg-slate-950/40 text-white placeholder-slate-700 focus:outline-none focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
               placeholder="exemple@email.com"
             />
           </div>
 
-          {/* Champ Message - S'étend sur toute la largeur */}
+          {/* Champ Message */}
           <div className="flex flex-col col-span-1 md:col-span-2">
-            <label htmlFor="message" className="mb-2 font-semibold text-gray-700">Message</label>
+            <label htmlFor="message" className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Message</label>
             <textarea
               id="message"
-              rows="5"
-              className="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none transition duration-150"
-              placeholder="Écrivez votre message ici..."
+              rows="6"
+              className="px-6 py-4 rounded-2xl bg-slate-950/40 text-white placeholder-slate-700 focus:outline-none focus:ring-4 focus:ring-teal-500/10 resize-none transition-all duration-300"
+              placeholder="Comment puis-je vous aider ?"
             ></textarea>
           </div>
 
-          {/* Bouton d'envoi - Centré et prend toute la largeur sur mobile si nécessaire */}
-          <div className="col-span-1 md:col-span-2 flex justify-center mt-4">
+          {/* Bouton d'envoi Flat Premium */}
+          <div className="col-span-1 md:col-span-2 flex justify-center mt-8">
             <button
               type="submit"
-              className="relative w-full sm:w-64 py-3 text-white font-bold bg-emerald-600 rounded-lg overflow-hidden transition duration-300 ease-in-out hover:bg-emerald-700 shadow-md hover:shadow-lg"
+              className="group relative w-full sm:w-80 py-4 bg-teal-500 text-slate-950 font-black rounded-2xl transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg shadow-teal-500/20 flex items-center justify-center gap-3 tracking-wide"
             >
               Envoyer le Message
+              <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </button>
           </div>
           

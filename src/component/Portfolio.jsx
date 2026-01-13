@@ -1,62 +1,86 @@
-import React from 'react';
-import { Star, StarOff } from 'lucide-react';
+import React from "react";
+import { Star, Code2, Cpu, Globe, Database, Terminal, Layers } from "lucide-react";
 
 const skills = [
-  { name: 'React JS', level: 4, description: "J'ai besoin de plus d'expérience avec React.js" },
-  { name: 'Vue JS', level: 3, description: "Je suis à l’aise avec Vue.js mais souhaite approfondir mes compétences" },
-  { name: 'Node JS', level: 4, description: "Je maîtrise Node.js mais cherche à renforcer mon expertise backend" },
-  { name: 'Express JS', level: 3, description: "Bonne base en Express, je souhaite aller plus loin avec les API REST" },
-  { name: 'Symfony Php', level: 3, description: "Bonne base en Symfony, je souhaite aller plus loin avec les API REST" },
-  { name: 'JSP en Java', level: 3, description: "Bonne base en Java, je souhaite aller plus loin avec les API REST" },
+  { name: "React JS", level: 4, icon: <Layers />, description: "Advanced frontend development with modern React patterns." },
+  { name: "Vue JS", level: 3, icon: <Globe />, description: "Strong understanding of Vue ecosystem and component architecture." },
+  { name: "Node JS", level: 4, icon: <Terminal />, description: "Backend development with scalable Node.js applications." },
+  { name: "Express JS", level: 3, icon: <Cpu />, description: "Building RESTful APIs with Express and middleware patterns." },
+  { name: "Symfony PHP", level: 3, icon: <Code2 />, description: "MVC backend development with Symfony framework." },
+  { name: "Java (JSP)", level: 3, icon: <Database />, description: "Server-side Java applications and web architecture." },
 ];
 
-function SkillCard({ name, level, description }) {
+function SkillCard({ name, level, description, icon }) {
   return (
-    <div className="bg-gray-300 rounded-xl p-10 shadow-sm border w-full
-     border-gray-300 hover:shadow-lg hover:border-b-4
-      hover:border-b-emerald-600 hover:scale-105 
-      transition duration-300">
-    
-      <h3 className="text-xl font-bold text-emerald-700 mb-1">{name}</h3>
-      <p className="text-sm text-gray-700 mb-3">{description}</p>
-      <div className="flex">
-        {[...Array(5)].map((_, i) =>
-          i < level ? (
-            <Star key={i} className="text-yellow-400 fill-yellow-400 mr-1 w-5 h-5" />
-          ) : (
-            <StarOff key={i} className="text-gray-600 mr-1 w-5 h-5" />
-          )
-        )}
+    // Suppression de "border" et "border-slate-800"
+    // Augmentation de l'arrondi pour un look plus organique
+    <div className="group relative bg-slate-900/60 backdrop-blur-xl rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-2 shadow-2xl">
+
+      <div className="relative z-10">
+        <div className="flex items-center gap-5 mb-6">
+          {/* L'icône devient le point focal : suppression de shadow-inner pour un aplat plus moderne */}
+          <div className="p-4 bg-slate-800/80 rounded-2xl text-teal-400 group-hover:text-slate-950 group-hover:bg-teal-500 transition-all duration-300">
+            {React.cloneElement(icon, { size: 28 })}
+          </div>
+          <h3 className="text-2xl font-bold text-white tracking-tight">{name}</h3>
+        </div>
+
+        <p className="text-slate-400 text-sm leading-relaxed mb-8 h-12 font-light">
+          {description}
+        </p>
+
+        {/* Pied de carte : la bordure est remplacée par un espacement plus clair */}
+        <div className="flex items-center justify-between mt-auto">
+          <span className="text-[10px] uppercase tracking-[0.25em] font-black text-slate-600 group-hover:text-teal-500/50 transition-colors">
+            Mastery
+          </span>
+          <div className="flex gap-2">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={`w-4 h-4 transition-all duration-700 ${
+                  i < level 
+                    ? "text-teal-400 fill-teal-400 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" 
+                    : "text-slate-800"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-function Portfolio() {
+export default function Portfolio() {
   return (
-    <section className=" min-h-screen ">
-    <div>
-     <div className='bg-gray-200 text-gray-200'>
-        .
-     </div><br />
-     <div>
-         <h2 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
-        Mes Compétences
-      </h2>
-     </div>
-      <div className="sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 ">
-        {skills.map((skill, idx) => (
-          <SkillCard
-            key={idx}
-            name={skill.name}
-            level={skill.level}
-            description={skill.description}
-          />
+    <div className="py-12">
+      <div className="text-center mb-20">
+        {/* On enlève aussi la bordure du petit badge d'en-tête */}
+        <div className="inline-block px-5 py-2 mb-6 rounded-xl bg-teal-500/10 text-teal-400 text-[10px] font-black uppercase tracking-[0.3em]">
+          Stack Technique
+        </div>
+        <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
+          Skills & <span className="text-teal-400">Expertise</span>
+        </h2>
+        <p className="mt-6 text-slate-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+          Mon arsenal technologique pour bâtir des solutions robustes.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {skills.map((skill, i) => (
+          <SkillCard key={i} {...skill} />
         ))}
       </div>
+      
+      <div className="mt-20 text-center">
+        <p className="text-slate-600 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-3">
+          <span className="w-8 h-px bg-slate-800"></span>
+          Git • Docker • Tailwind • Agile
+          <span className="w-8 h-px bg-slate-800"></span>
+        </p>
+      </div>
     </div>
-    </section>
   );
 }
-
-export default Portfolio;
