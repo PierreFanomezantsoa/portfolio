@@ -8,6 +8,7 @@ const skills = [
   { name: "Express JS", level: 3, icon: <Cpu />, description: "Building RESTful APIs with Express and middleware patterns." },
   { name: "Symfony PHP", level: 3, icon: <Code2 />, description: "MVC backend development with Symfony framework." },
   { name: "Java (JSP)", level: 3, icon: <Database />, description: "Server-side Java applications and web architecture." },
+  { name: "Nest JS ", level: 3, icon: <Database />, description: "Metrise code backend Nest JS." },
 ];
 
 function SkillCard({ name, level, description, icon }) {
