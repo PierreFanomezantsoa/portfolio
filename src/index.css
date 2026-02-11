@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+:root {
+	--bg-start: #07142a; /* deep navy */
+	--bg-mid: #081733;
+	--bg-end: #010612; /* near black blue */
+	--text-color: #E6F3FF; /* soft high-contrast text */
+}
+
+html, body, #root {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	background-color: var(--bg-end);
+	background-image: radial-gradient(ellipse at 10% 10%, rgba(9,23,50,0.85) 0%, rgba(7,20,42,0.85) 30%, rgba(1,6,18,1) 100%), linear-gradient(180deg, var(--bg-start), var(--bg-end));
+	color: var(--text-color);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Links and interactive elements: slightly brighter for affordance */
+a, button {
+	color: #BEE3FF;
+}
+
+/* Utility: apply comfortable padding on main app container if needed */
+.app-container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}

@@ -1,52 +1,78 @@
 import React from "react";
-import { Star, Code2, Cpu, Globe, Database, Terminal, Layers } from "lucide-react";
+import { Star, Code2, Cpu, Globe, Database, Terminal, Layers, Box } from "lucide-react";
 
 const skills = [
-  { name: "React JS", level: 4, icon: <Layers />, description: "Advanced frontend development with modern React patterns." },
-  { name: "Vue JS", level: 3, icon: <Globe />, description: "Strong understanding of Vue ecosystem and component architecture." },
-  { name: "Node JS", level: 4, icon: <Terminal />, description: "Backend development with scalable Node.js applications." },
-  { name: "Express JS", level: 3, icon: <Cpu />, description: "Building RESTful APIs with Express and middleware patterns." },
-  { name: "Symfony PHP", level: 3, icon: <Code2 />, description: "MVC backend development with Symfony framework." },
-  { name: "Java (JSP)", level: 3, icon: <Database />, description: "Server-side Java applications and web architecture." },
-  { name: "Nest JS ", level: 3, icon: <Database />, description: "Metrise code backend Nest JS." },
+  { 
+    name: "React JS", 
+    level: 4, 
+    icon: <Layers />, 
+    description: "Architecture de composants complexes et gestion d'état avancée (Hooks, Context, Redux)." 
+  },
+  { 
+    name: "Node JS", 
+    level: 4, 
+    icon: <Terminal />, 
+    description: "Construction d'environnements backend performants et scalables avec TypeScript." 
+  },
+  { 
+    name: "Nest JS", 
+    level: 4, 
+    icon: <Box />, 
+    description: "Développement d'APIs modulaires et robustes suivant les principes SOLID." 
+  },
+  { 
+    name: "Symfony PHP", 
+    level: 3, 
+    icon: <Code2 />, 
+    description: "Maîtrise du framework MVC pour des applications métier structurées et sécurisées." 
+  },
+  { 
+    name: "Vue JS", 
+    level: 3, 
+    icon: <Globe />, 
+    description: "Création d'interfaces réactives et fluides avec l'écosystème Vue 3." 
+  },
+  { 
+    name: "Express JS", 
+    level: 3, 
+    icon: <Cpu />, 
+    description: "Conception de micro-services légers et de middlewares personnalisés." 
+  }
 ];
 
 function SkillCard({ name, level, description, icon }) {
   return (
-    // Suppression de "border" et "border-slate-800"
-    // Augmentation de l'arrondi pour un look plus organique
-    <div className="group relative bg-slate-900/60 backdrop-blur-xl rounded-[2rem] p-8 transition-all duration-500 hover:-translate-y-2 shadow-2xl">
-
-      <div className="relative z-10">
-        <div className="flex items-center gap-5 mb-6">
-          {/* L'icône devient le point focal : suppression de shadow-inner pour un aplat plus moderne */}
-          <div className="p-4 bg-slate-800/80 rounded-2xl text-teal-400 group-hover:text-slate-950 group-hover:bg-teal-500 transition-all duration-300">
-            {React.cloneElement(icon, { size: 28 })}
-          </div>
-          <h3 className="text-2xl font-bold text-white tracking-tight">{name}</h3>
+    <div className="group relative bg-white rounded-[2.5rem] p-10 transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 border border-slate-100 flex flex-col h-full">
+      
+      {/* Icone avec effet de morphing au hover */}
+      <div className="flex items-center gap-6 mb-8">
+        <div className="p-5 bg-slate-50 rounded-[1.5rem] text-teal-600 group-hover:text-white group-hover:bg-teal-600 group-hover:rotate-[10deg] transition-all duration-500 shadow-sm">
+          {React.cloneElement(icon, { size: 30, strokeWidth: 1.5 })}
         </div>
+        <h3 className="text-2xl font-black text-slate-900 tracking-tight leading-none">{name}</h3>
+      </div>
 
-        <p className="text-slate-400 text-sm leading-relaxed mb-8 h-12 font-light">
-          {description}
-        </p>
+      <p className="text-slate-500 text-sm leading-relaxed mb-10 font-normal opacity-90">
+        {description}
+      </p>
 
-        {/* Pied de carte : la bordure est remplacée par un espacement plus clair */}
-        <div className="flex items-center justify-between mt-auto">
-          <span className="text-[10px] uppercase tracking-[0.25em] font-black text-slate-600 group-hover:text-teal-500/50 transition-colors">
-            Mastery
-          </span>
-          <div className="flex gap-2">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 transition-all duration-700 ${
-                  i < level 
-                    ? "text-teal-400 fill-teal-400 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" 
-                    : "text-slate-800"
-                }`}
-              />
-            ))}
-          </div>
+      {/* Barre de maîtrise stylisée */}
+      <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
+        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-400 group-hover:text-teal-600 transition-colors">
+          Expertise
+        </span>
+        <div className="flex gap-1.5">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 w-6 rounded-full transition-all duration-700 ${
+                i < level 
+                  ? "bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.3)]" 
+                  : "bg-slate-100"
+              }`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            />
+          ))}
         </div>
       </div>
     </div>
@@ -55,32 +81,39 @@ function SkillCard({ name, level, description, icon }) {
 
 export default function Portfolio() {
   return (
-    <div className="py-12">
-      <div className="text-center mb-20">
-        {/* On enlève aussi la bordure du petit badge d'en-tête */}
-        <div className="inline-block px-5 py-2 mb-6 rounded-xl bg-teal-500/10 text-teal-400 text-[10px] font-black uppercase tracking-[0.3em]">
+    <div className="py-16">
+      {/* Header de section */}
+      <div className="text-center mb-24 relative">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 w-24 h-24 bg-teal-500/5 blur-3xl rounded-full"></div>
+        
+        <span className="text-teal-600 text-[11px] font-black uppercase tracking-[0.5em] mb-5 block relative z-10">
           Stack Technique
-        </div>
-        <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
-          Skills & <span className="text-teal-400">Expertise</span>
+        </span>
+        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-8 relative z-10">
+          Compétences & <span className="text-teal-600">Expertise</span>
         </h2>
-        <p className="mt-6 text-slate-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-          Mon arsenal technologique pour bâtir des solutions robustes.
+        <p className="text-slate-500 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed opacity-80">
+          Un arsenal technologique moderne pour transformer vos visions en produits digitaux d'exception.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      {/* Grille de compétences */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
         {skills.map((skill, i) => (
           <SkillCard key={i} {...skill} />
         ))}
       </div>
       
-      <div className="mt-20 text-center">
-        <p className="text-slate-600 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-3">
-          <span className="w-8 h-px bg-slate-800"></span>
-          Git • Docker • Tailwind • Agile
-          <span className="w-8 h-px bg-slate-800"></span>
-        </p>
+      {/* Footer Tools - Style Badge minimaliste */}
+      <div className="mt-24 flex flex-col items-center gap-8">
+        <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+        <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 max-w-3xl">
+          {["Git • GitHub", "Docker", "Tailwind CSS", "Agile • Scrum", "TypeScript"].map((tool, index) => (
+            <span key={index} className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hover:text-teal-600 transition-colors cursor-default">
+              {tool}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

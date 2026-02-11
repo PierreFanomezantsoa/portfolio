@@ -1,44 +1,45 @@
 import React from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 
+// Importation des images (assurez-vous que les chemins sont corrects)
 import Note from "../img/notes.avif";
 import Inscription from "../img/inscription.webp";
 import Medicine from "../img/medicine.jpg";
 import Payment from "../img/payment.jpg";
 import Avions from "../img/avions.jpg";
 
-const data = [
+const projects = [
   {
-    name: "Student Registration System",
-    description: "Internship project for DEGSS Faculty – Fianarantsoa. Optimized for high-volume data entry and administrative reporting.",
+    name: "Système d'Inscription Étudiant",
+    description: "Conçu pour la Faculté DEGSS – Fianarantsoa. Optimisé pour la saisie massive de données et le reporting administratif complexe.",
     image: Inscription,
     github: "https://github.com/ton-projet1",
     tags: ["PHP", "SQL", "Bootstrap"]
   },
   {
-    name: "Student Grading Platform",
-    description: "Academic management system for EGS-MCI Faculty. Featuring real-time grade calculations and student portals.",
+    name: "Gestionnaire de Notes",
+    description: "Système de gestion académique pour la Faculté EGS-MCI. Inclut le calcul des moyennes en temps réel et des portails sécurisés.",
     image: Note,
-    github: "https://github.com/ton-projet2",
+    github: "https://github.com/PierreFanomezantsoa/gestionNotes.git",
     tags: ["React", "Node.js"]
   },
   {
-    name: "Mobile Money Management",
-    description: "Secure payment gateway simulation built with Java. Handles transaction logs and user balance encryption.",
+    name: "Passerelle Mobile Money",
+    description: "Simulation de passerelle de paiement sécurisée en Java. Gestion des journaux de transactions et chiffrement des données sensibles.",
     image: Payment,
     github: "https://github.com/ton-projet3",
     tags: ["Java", "JSP", "MySQL"]
   },
   {
-    name: "Pharmacy Management",
-    description: "Full-scale inventory system. Integrated stock alerts, expiration tracking, and sales analytics.",
+    name: "Logiciel de Pharmacie",
+    description: "Système d'inventaire complet avec alertes de stock intelligentes, suivi des péremptions et analyses statistiques des ventes.",
     image: Medicine,
     github: "https://github.com/ton-projet4",
     tags: ["Vue.js", "Laravel"]
   },
   {
-    name: "Flight Booking App",
-    description: "Cross-platform mobile application for seamless travel planning and real-time flight status tracking.",
+    name: "Réservation de Vols",
+    description: "Application mobile intuitive pour la planification de voyages et le suivi des vols en temps réel via Firebase.",
     image: Avions,
     github: "https://github.com/ton-projet5",
     tags: ["Flutter", "Dart", "Firebase"]
@@ -47,85 +48,96 @@ const data = [
 
 export default function Experience() {
   return (
-    <div className="py-6">
-      {/* Header Section */}
-      <div className="flex flex-col items-center text-center mb-20">
-        <span className="text-teal-400 text-[10px] font-black uppercase tracking-[0.4em] mb-4">
-          Case Studies
+    <div className="py-12">
+      {/* Section En-tête - Alignée sur le style global */}
+      <div className="flex flex-col items-center text-center mb-24">
+        <span className="text-teal-600 text-[10px] font-black uppercase tracking-[0.4em] mb-4">
+          Études de cas
         </span>
-        <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter mb-6">
-          Selected <span className="text-teal-400">Works</span>
+        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6">
+          Mes <span className="text-teal-600">Réalisations</span>
         </h2>
-        <p className="text-slate-500 max-w-xl text-lg font-light leading-relaxed">
-          A showcase of full-stack engineering, blending robust backend logic with modern interface design.
+        <p className="text-slate-500 max-w-2xl text-lg font-normal leading-relaxed">
+          Une vitrine d'ingénierie full-stack, mêlant une logique métier robuste à une expérience utilisateur moderne.
         </p>
       </div>
 
-     {/* Projects Grid - Gap réduit de 12 à 8 */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {data.map((item, i) => (
-    <div
-      key={i}
-      // Réduction de l'arrondi pour une taille plus compacte
-      className="group relative flex flex-col bg-slate-900/40 backdrop-blur-xl rounded-3xl transition-all duration-500 hover:-translate-y-2 shadow-xl"
-    >
-      {/* Image Container - Hauteur réduite à h-48 */}
-      <div className="relative h-48 w-full overflow-hidden rounded-3xl p-2">
-        <div className="relative h-full w-full overflow-hidden rounded-2xl">
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-[0.75] group-hover:brightness-100"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-          
-          {/* GitHub Icon - Taille réduite */}
-          <a 
-            href={item.github}
-            className="absolute top-3 right-3 p-2 bg-slate-950/60 backdrop-blur-md rounded-full border border-white/5 text-white hover:bg-teal-500 hover:text-slate-950 transition-all duration-300"
+      {/* Grille de Projets - Design Premium */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {projects.map((project, i) => (
+          <div
+            key={i}
+            className="group relative flex flex-col bg-white rounded-[2.5rem] transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl border border-slate-100 overflow-hidden"
           >
-            <Github size={16} />
-          </a>
-        </div>
-      </div>
-
-      {/* Content Area - Padding réduit à p-5 */}
-      <div className="p-5 pt-2 flex flex-col flex-grow">
-        {/* Tags Section - Plus compacte */}
-        <div className="flex gap-1.5 mb-3 flex-wrap">
-          {item.tags?.map((tag, index) => (
-            <span key={index} className="text-[8px] uppercase tracking-wider font-bold px-2.5 py-1 bg-slate-800/80 text-slate-400 group-hover:text-teal-400 transition-colors rounded-lg">
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Titre réduit à text-xl */}
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors duration-300">
-          {item.name}
-        </h3>
-        
-        {/* Description limitée à 2 lignes */}
-        <p className="text-slate-500 text-xs leading-relaxed font-light mb-5 line-clamp-2">
-          {item.description}
-        </p>
-
-        {/* Action Button - Plus discret */}
-        <div className="mt-auto">
-          <a
-            href={item.github}
-            className="inline-flex items-center gap-2 text-white/80 font-bold text-[10px] uppercase tracking-widest group/link hover:text-teal-400 transition-colors"
-          >
-            Détails
-            <div className="p-1 rounded-full bg-slate-800 group-hover/link:bg-teal-500 group-hover/link:text-slate-950 transition-all">
-              <ArrowUpRight size={12} />
+            {/* Conteneur Image avec Overlay dynamique */}
+            <div className="relative h-56 w-full overflow-hidden p-3">
+              <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Badge GitHub flottant */}
+                <a 
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-md rounded-2xl text-slate-900 hover:bg-teal-600 hover:text-white transition-all duration-300 shadow-xl"
+                  title="Voir le code source"
+                >
+                  <Github size={20} />
+                </a>
+              </div>
             </div>
-          </a>
-        </div>
+
+            {/* Zone de Contenu */}
+            <div className="p-8 pt-4 flex flex-col flex-grow">
+              {/* Tags style "Pill" */}
+              <div className="flex gap-2 mb-4 flex-wrap">
+                {project.tags?.map((tag, index) => (
+                  <span key={index} className="text-[9px] uppercase tracking-wider font-black px-3 py-1.5 bg-slate-50 text-slate-400 group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors rounded-full border border-slate-100">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Titre du projet */}
+              <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-teal-600 transition-colors duration-300 tracking-tight">
+                {project.name}
+              </h3>
+              
+              {/* Description avec limitation de lignes pour l'alignement */}
+              <p className="text-slate-500 text-sm leading-relaxed font-normal mb-8 line-clamp-3">
+                {project.description}
+              </p>
+
+              {/* Lien d'action style minimaliste */}
+              <div className="mt-auto pt-6 border-t border-slate-50">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] group/link hover:text-teal-600 transition-colors"
+                >
+                  Explorer le projet
+                  <div className="p-2 rounded-full bg-slate-100 group-hover/link:bg-teal-600 group-hover/link:text-white transition-all duration-300">
+                    <ArrowUpRight size={14} />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
+
+      {/* Footer de section optionnel */}
+      <div className="mt-24 text-center">
+        <p className="text-slate-400 text-sm italic font-light">
+          D'autres projets sont disponibles sur mon profil GitHub.
+        </p>
+      </div>
     </div>
   );
 }
