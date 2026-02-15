@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Github, Mail, Facebook, MessageCircle } from 'lucide-react';
+import { Linkedin, Github, Mail, MessageCircle } from 'lucide-react'; // Facebook retiré car non utilisé, Linkedin conservé
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,7 +14,6 @@ function Footer() {
           {/* Colonne 1 : Branding */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-6 group cursor-default">
-              {/* Teal plus clair : bg-teal-400 */}
               <div className="w-6 h-6 bg-teal-400 rounded-sm rotate-45 shadow-lg shadow-teal-400/20"></div>
               <span className="text-slate-950 font-black tracking-tighter text-2xl uppercase">
                 PIERRE<span className="text-teal-400">.</span>
@@ -25,7 +24,7 @@ function Footer() {
             </p>
           </div>
 
-          {/* Colonne 2 : Navigation - TEAL CLAIR APPLIQUÉ */}
+          {/* Colonne 2 : Navigation */}
           <div className="flex flex-col gap-8">
             <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900">
               Exploration
@@ -43,7 +42,6 @@ function Footer() {
                   href={`#${item.id}`} 
                   className="group flex items-center gap-2 text-[12px] font-bold text-slate-900 hover:text-teal-500 transition-all duration-300 w-fit tracking-widest uppercase"
                 >
-                  {/* Indicateur visuel en teal-400 */}
                   <span className="w-0 h-px bg-teal-400 group-hover:w-4 transition-all duration-300"></span>
                   {item.name}
                 </a>
@@ -51,12 +49,20 @@ function Footer() {
             </nav>
           </div>
 
-          {/* Colonne 3 : Connect */}
+          {/* Colonne 3 : Connect - AJOUT DE LINKEDIN ICI */}
           <div className="flex flex-col gap-8">
             <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-900">
               Réseaux
             </span>
             <div className="flex flex-wrap gap-3">
+              <SocialIcon 
+                href="https://linkedin.com/in/votre-profil" /* Remplacez par votre lien */
+                icon={<Linkedin size={20} />} 
+              />
+              <SocialIcon 
+                href="https://github.com/votre-username" 
+                icon={<Github size={20} />} 
+              />
               <SocialIcon 
                 href="https://wa.me/261342626760" 
                 icon={<MessageCircle size={20} />} 
@@ -64,10 +70,6 @@ function Footer() {
               <SocialIcon 
                 href="mailto:rnandrasanarivo@gmail.com" 
                 icon={<Mail size={20} />} 
-              />
-              <SocialIcon 
-                href="https://github.com" 
-                icon={<Github size={20} />} 
               />
             </div>
           </div>
@@ -87,7 +89,7 @@ function Footer() {
           
           <div className="flex items-center gap-4">
              <span className="text-[10px] font-black text-slate-500 tracking-widest uppercase bg-slate-50 border border-slate-100 px-4 py-2 rounded-full">
-                Madagascar
+               Madagascar
              </span>
           </div>
         </div>
