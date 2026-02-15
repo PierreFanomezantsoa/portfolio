@@ -1,5 +1,6 @@
 import React from "react";
 import { Star, Code2, Cpu, Globe, Database, Terminal, Layers, Box } from "lucide-react";
+import { motion } from "framer-motion";
 
 const skills = [
   { 
@@ -40,76 +41,98 @@ const skills = [
   }
 ];
 
-function SkillCard({ name, level, description, icon }) {
+function SkillCard({ name, level, description, icon, index }) {
   return (
-    <div className="group relative bg-white rounded-[2.5rem] p-10 transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 border border-slate-100 flex flex-col h-full">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group relative bg-slate-900/40 backdrop-blur-xl rounded-[2rem] p-8 transition-all duration-500 border border-white/10 hover:border-teal-500/30 flex flex-col h-full shadow-2xl"
+    >
+      {/* Glow Effect arrière-plan icône */}
+      <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-teal-500/5 blur-2xl rounded-full group-hover:bg-teal-500/10 transition-colors"></div>
       
-      {/* Icone avec effet de morphing au hover */}
-      <div className="flex items-center gap-6 mb-8">
-        <div className="p-5 bg-slate-50 rounded-[1.5rem] text-teal-600 group-hover:text-white group-hover:bg-teal-600 group-hover:rotate-[10deg] transition-all duration-500 shadow-sm">
-          {React.cloneElement(icon, { size: 30, strokeWidth: 1.5 })}
+      {/* Icone et Titre */}
+      <div className="flex items-center gap-5 mb-6">
+        <div className="p-4 bg-white/5 rounded-2xl text-teal-400 group-hover:text-white group-hover:bg-teal-500 group-hover:rotate-6 transition-all duration-500 shadow-inner">
+          {React.cloneElement(icon, { size: 24, strokeWidth: 2 })}
         </div>
-        <h3 className="text-2xl font-black text-slate-900 tracking-tight leading-none">{name}</h3>
+        <h3 className="text-xl font-bold text-white tracking-tight leading-none">{name}</h3>
       </div>
 
-      <p className="text-slate-500 text-sm leading-relaxed mb-10 font-normal opacity-90">
+      <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium">
         {description}
       </p>
 
-      {/* Barre de maîtrise stylisée */}
-      <div className="mt-auto flex items-center justify-between pt-6 border-t border-slate-50">
-        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-slate-400 group-hover:text-teal-600 transition-colors">
-          Expertise
-        </span>
+      {/* Expertise Section */}
+      <div className="mt-auto flex flex-col gap-4">
+        <div className="flex items-center justify-between">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-black text-slate-500 group-hover:text-teal-400 transition-colors">
+            Niveau d'expertise
+          </span>
+          <span className="text-teal-400 text-[10px] font-bold">{level}/5</span>
+        </div>
+        
+        {/* Barre de maîtrise stylisée */}
         <div className="flex gap-1.5">
           {[...Array(5)].map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 w-6 rounded-full transition-all duration-700 ${
+              className={`h-1.5 flex-1 rounded-full transition-all duration-700 ${
                 i < level 
-                  ? "bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.3)]" 
-                  : "bg-slate-100"
+                  ? "bg-teal-500 shadow-[0_0_12px_rgba(20,184,166,0.4)]" 
+                  : "bg-white/5"
               }`}
-              style={{ transitionDelay: `${i * 100}ms` }}
             />
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-export default function Portfolio() {
+export default function SkillsSection() {
   return (
-    <div className="py-16">
-      {/* Header de section */}
-      <div className="text-center mb-24 relative">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 w-24 h-24 bg-teal-500/5 blur-3xl rounded-full"></div>
-        
-        <span className="text-teal-600 text-[11px] font-black uppercase tracking-[0.5em] mb-5 block relative z-10">
+    <div className="py-20 px-6 max-w-7xl mx-auto relative z-10">
+      
+      {/* Header */}
+      <div className="text-center mb-20 relative">
+        <motion.span 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-teal-400 text-[10px] font-black uppercase tracking-[0.5em] mb-4 block"
+        >
           Stack Technique
-        </span>
-        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-8 relative z-10">
-          Compétences & <span className="text-teal-600">Expertise</span>
-        </h2>
-        <p className="text-slate-500 max-w-2xl mx-auto text-lg md:text-xl font-normal leading-relaxed opacity-80">
+        </motion.span>
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-6"
+        >
+          Compétences & <span className="text-teal-400">Expertise</span>
+        </motion.h2>
+        <p className="text-slate-400 max-w-2xl mx-auto text-lg font-medium leading-relaxed opacity-80 italic">
           Un arsenal technologique moderne pour transformer vos visions en produits digitaux d'exception.
         </p>
       </div>
 
-      {/* Grille de compétences */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+      {/* Grille */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {skills.map((skill, i) => (
-          <SkillCard key={i} {...skill} />
+          <SkillCard key={i} {...skill} index={i} />
         ))}
       </div>
       
-      {/* Footer Tools - Style Badge minimaliste */}
-      <div className="mt-24 flex flex-col items-center gap-8">
-        <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
-        <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 max-w-3xl">
-          {["Git • GitHub", "Docker", "Tailwind CSS", "Agile • Scrum", "TypeScript"].map((tool, index) => (
-            <span key={index} className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hover:text-teal-600 transition-colors cursor-default">
+      {/* Outils secondaires - Style Dark Badge */}
+      <div className="mt-20 flex flex-col items-center gap-8">
+        <div className="h-px w-32 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
+          {["Git • GitHub", "Docker", "Tailwind CSS", "Agile • Scrum", "TypeScript", "PostgreSQL", "Redis"].map((tool, index) => (
+            <span 
+              key={index} 
+              className="px-4 py-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest bg-white/5 border border-white/5 rounded-full hover:text-teal-400 hover:border-teal-500/30 transition-all cursor-default"
+            >
               {tool}
             </span>
           ))}

@@ -1,7 +1,8 @@
 import React from "react";
 import { ArrowUpRight, Github } from "lucide-react";
+import { motion } from "framer-motion";
 
-// Importation des images
+// Importation des images (Gardez vos chemins)
 import Note from "../img/notes.avif";
 import Inscription from "../img/inscription.webp";
 import Medicine from "../img/medicine.jpg";
@@ -12,141 +13,146 @@ import Kiosque from "../img/kiosque_num.webp";
 const projects = [
   {
     name: "Système d'Inscription Étudiant",
-    description: "Conçu pour la Faculté DEGSS – Fianarantsoa. Optimisé pour la saisie massive de données et le reporting administratif complexe.",
+    description: "Conçu pour la Faculté DEGSS. Optimisé pour la saisie massive de données et le reporting administratif complexe.",
     image: Inscription,
     github: "https://github.com/PierreFanomezantsoa/projet_inscription.git",
     tags: ["Vue JS", "Postgresql", "Node JS"],
   },
   {
     name: "Gestionnaire de Notes",
-    description: "Système de gestion académique pour la Faculté EGS-MCI. Inclut le calcul des moyennes en temps réel et des portails sécurisés.",
+    description: "Système de gestion académique pour la Faculté EGS-MCI. Inclut le calcul des moyennes et des portails sécurisés.",
     image: Note,
     github: "https://github.com/PierreFanomezantsoa/gestionNotes.git",
     tags: ["React", "Node.js"],
   },
   {
     name: "Passerelle Mobile Money",
-    description: "Simulation de passerelle de paiement sécurisée en Java. Gestion des journaux de transactions et chiffrement des données sensibles.",
+    description: "Simulation de passerelle de paiement sécurisée en Java. Gestion des journaux et chiffrement des données.",
     image: Payment,
     github: "https://github.com/ton-projet3",
     tags: ["Java", "JSP", "MySQL"],
   },
   {
     name: "Logiciel de Medicines",
-    description: "Système d'inventaire complet avec alertes de stock intelligentes, suivi des péremptions et analyses statistiques des ventes.",
+    description: "Système d'inventaire complet avec alertes de stock intelligentes et analyses statistiques des ventes.",
     image: Medicine,
     github: "https://github.com/PierreFanomezantsoa/Medicines.git",
     tags: ["Vue.js", "Laravel"],
   },
   {
-    name: "Projet ordonnancement de taches en affectations",
-    description: "Projet ordonnancement de tâches en affectations pour la gestion de projets complexes. Utilisation d'algorithmes d'optimisation pour maximiser l'efficacité des ressources.",
+    name: "Ordonnancement de tâches",
+    description: "Optimisation de ressources via des algorithmes complexes pour la gestion de projets industriels.",
     image: Avions,
     github: "https://github.com/PierreFanomezantsoa/ProjeROAffectation.git",
-    tags: ["React Native"],
+    tags: ["React Native", "Algo"],
   },
-
   {
     name: "Kiosque d’Affichage Numérique",
-    description: "Application mobile connectée à une API NestJS permettant la gestion et l’affichage dynamique de contenus multimédias pour bornes interactives.",
+    description: "Application mobile connectée à une API NestJS pour la gestion dynamique de contenus multimédias.",
     image: Kiosque,
     github: "https://github.com/PierreFanomezantsoa/Front_kiosque.git",
-    tags: ["React Native", "NestJS", "API REST"],
+    tags: ["React Native", "NestJS"],
   },
 ];
 
 export default function Experience() {
   return (
-    <div className="py-16 px-6 max-w-7xl mx-auto">
+    <div className="py-20 px-6 max-w-7xl mx-auto relative z-10 font-sans">
+      
       {/* Header */}
-      <div className="flex flex-col items-center text-center mb-20">
-        <span className="text-teal-600 text-[10px] font-black uppercase tracking-[0.4em] mb-4">
-          Études de cas
-        </span>
-        <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter mb-6">
-          Mes <span className="text-teal-600">Réalisations</span>
-        </h2>
-        <p className="text-slate-500 max-w-2xl text-lg font-normal leading-relaxed">
-          Une vitrine d'ingénierie full-stack, mêlant une logique métier robuste
-          à une expérience utilisateur moderne.
-        </p>
+      <div className="flex flex-col items-center text-center mb-16">
+        <motion.span 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-teal-400 text-[10px] font-bold uppercase tracking-[0.5em] mb-4 bg-teal-400/10 px-4 py-2 rounded-full border border-teal-400/20"
+        >
+          Portfolio & Engineering
+        </motion.span>
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-4xl md:text-6xl font-black text-white tracking-tight mb-6"
+        >
+          Mes <span className="text-teal-400">Réalisations</span>
+        </motion.h2>
       </div>
 
-      {/* Grid - Les cartes auront toutes la même hauteur par ligne grâce au comportement Grid par défaut */}
-
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {projects.map((project, i) => (
-    <div
-      key={i}
-      className="group relative flex flex-col aspect-[4/5] bg-white rounded-[2.5rem] transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl border border-slate-100 overflow-hidden"
-    >
-      {/* Image Section - Réduite à 40% de la hauteur pour laisser de la place au texte */}
-      <div className="relative h-[40%] w-full overflow-hidden p-3 shrink-0">
-        <div className="relative h-full w-full overflow-hidden rounded-[2rem]">
-          <img
-            src={project.image}
-            alt={project.name}
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-md rounded-2xl text-slate-900 hover:bg-teal-600 hover:text-white transition-all duration-300 shadow-xl z-10"
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ y: -8 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="group relative flex flex-col rounded-[2rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-md hover:border-teal-500/30 transition-all duration-300"
           >
-            <Github size={18} />
-          </a>
-        </div>
-      </div>
-
-      {/* Content Section - Le flex-grow occupe le reste de l'espace défini par l'aspect-ratio */}
-      <div className="p-8 pt-2 flex flex-col flex-grow min-h-0"> 
-        {/* Tags */}
-        <div className="flex gap-2 mb-3 flex-wrap shrink-0">
-          {project.tags?.slice(0, 3).map((tag, index) => ( // On limite à 3 tags pour le visuel
-            <span
-              key={index}
-              className="text-[8px] uppercase tracking-wider font-black px-2 py-1 bg-slate-50 text-slate-400 group-hover:bg-teal-50 group-hover:text-teal-600 transition-colors rounded-full border border-slate-100"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors duration-300 tracking-tight shrink-0">
-          {project.name}
-        </h3>
-
-        {/* Description avec line-clamp pour forcer le texte à rester dans le "cadre" sans l'étirer */}
-        <p className="text-slate-500 text-sm leading-relaxed font-normal mb-4 overflow-hidden line-clamp-3 md:line-clamp-4">
-          {project.description}
-        </p>
-
-        {/* Footer - Poussé vers le bas du cadre proportionnel */}
-        <div className="mt-auto pt-4 border-t border-slate-50 shrink-0">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3  font-black text-[10px] uppercase tracking-[0.2em] group/link transition-colors"
-          >
-            Explorer
-            <div className="p-1.5 rounded-full bg-slate-100 group-hover/link:bg-teal-700 group-hover/link:text-white transition-all duration-300">
-              <ArrowUpRight size={12} />
+            {/* Image Section - Hauteur réduite pour compacité */}
+            <div className="relative h-48 w-full overflow-hidden p-3">
+              <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60" />
+                
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-3 right-3 p-2.5 bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl text-white hover:bg-teal-400 hover:text-slate-900 transition-all z-10"
+                >
+                  <Github size={18} />
+                </a>
+              </div>
             </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
 
-      {/* Footer de la page */}
-      <div className="mt-24 text-center">
-        <p className="text-slate-400 text-sm italic font-light">
-          D'autres projets sont disponibles sur mon profil GitHub.
+            {/* Content Section */}
+            <div className="px-6 pb-6 pt-2 flex flex-col"> 
+              <div className="flex gap-2 mb-3 flex-wrap">
+                {project.tags?.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="text-[9px] uppercase tracking-wider font-bold px-2.5 py-1 bg-teal-400/5 text-teal-400/80 rounded border border-teal-400/10"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-400 transition-colors">
+                {project.name}
+              </h3>
+
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                {project.description}
+              </p>
+
+              {/* Action Footer */}
+              <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-teal-400 transition-all"
+                >
+                  Explorer
+                  <ArrowUpRight size={14} />
+                </a>
+                <div className="w-1.5 h-1.5 rounded-full bg-teal-500/40 group-hover:bg-teal-400 group-hover:shadow-[0_0_8px_#2dd4bf] transition-all" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Signature */}
+      <div className="mt-20 text-center opacity-30">
+        <p className="text-slate-500 text-[9px] font-bold tracking-[0.4em] uppercase">
+          Curated Works • 2024
         </p>
       </div>
     </div>

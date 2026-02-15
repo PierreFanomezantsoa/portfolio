@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2 } from 'lucide-react';
+import { Send, CheckCircle2, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function Contact() {
@@ -15,8 +15,7 @@ function Contact() {
     const emailValue = formData.get("email");
     setSenderEmail(emailValue);
 
-    // CONFIGURATION WEB3FORMS
-    formData.append("access_key", "be4625a4-d0b6-448b-ae59-b81684646fe9"); // Mets ta clé ici
+    formData.append("access_key", "be4625a4-d0b6-448b-ae59-b81684646fe9");
     formData.append("subject", `Nouveau message de ${formData.get("email")}`);
 
     try {
@@ -36,121 +35,128 @@ function Contact() {
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="w-full py-20 px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto bg-white p-12 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 text-center"
-        >
-          <div className="w-20 h-20 bg-teal-50 text-teal-400 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={40} />
-          </div>
-          <h2 className="text-3xl font-black text-slate-900 mb-4 uppercase tracking-tighter">Message Envoyé !</h2>
-          <p className="text-slate-500 mb-8">
-            Merci Pierre, votre message a bien été transmis. <br />
-            Je reviens vers vous sur <span className="text-teal-500 font-bold">{senderEmail}</span> très vite.
-          </p>
-          <button 
-            onClick={() => setSubmitted(false)}
-            className="text-teal-500 font-black uppercase text-[10px] tracking-widest hover:text-slate-900 transition-colors"
-          >
-            Envoyer un autre message
-          </button>
-        </motion.div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full py-12"> 
-      <div className="max-w-3xl mx-auto bg-white p-8 md:p-14 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden">
-        
-        {/* Décoration subtile Teal 400 */}
-        <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-40 h-40 bg-teal-400/5 blur-3xl rounded-full"></div>
-
-        <div className="text-center mb-12 relative z-10">
-          <span className="text-teal-500 text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">
-            Contact
-          </span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tighter leading-none">
-            Démarrons un <span className="text-teal-400">Projet</span>
-          </h2>
-          <p className="text-slate-500 font-normal text-base md:text-lg max-w-md mx-auto leading-relaxed">
-            Une idée ou une collaboration ? Écrivez-moi.
-          </p>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
-
-          {/* Nom */}
-          <div className="flex flex-col">
-            <label className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Nom</label>
-            <input
-              type="text"
-              name="name"
-              required
-              className="px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-teal-400/5 focus:bg-white focus:border-teal-400/40 transition-all duration-300"
-              placeholder="Votre nom"
-            />
-          </div>
-
-          {/* Prénom */}
-          <div className="flex flex-col">
-            <label className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Prénom</label>
-            <input
-              type="text"
-              name="firstname"
-              className="px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-teal-400/5 focus:bg-white focus:border-teal-400/40 transition-all duration-300"
-              placeholder="Votre prénom"
-            />
-          </div>
-
-          {/* Email */}
-          <div className="flex flex-col col-span-1 md:col-span-2">
-            <label className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Adresse Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-teal-400/5 focus:bg-white focus:border-teal-400/40 transition-all duration-300"
-              placeholder="votre@email.com"
-            />
-          </div>
-
-          {/* Message */}
-          <div className="flex flex-col col-span-1 md:col-span-2">
-            <label className="mb-3 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Votre Message</label>
-            <textarea
-              name="message"
-              required
-              rows="5"
-              className="px-6 py-4 rounded-[2rem] bg-slate-50 border border-slate-100 text-slate-900 text-sm focus:outline-none focus:ring-4 focus:ring-teal-400/5 focus:bg-white focus:border-teal-400/40 resize-none transition-all duration-300"
-              placeholder="Décrivez votre projet..."
-            ></textarea>
-          </div>
-
-          {/* Bouton */}
-          <div className="col-span-1 md:col-span-2 flex justify-center mt-6">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`group flex items-center justify-center gap-3 px-12 py-5 bg-teal-400 text-white text-[11px] font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-xl shadow-teal-400/20 ${
-                isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-teal-500 hover:scale-105 active:scale-95'
-              }`}
+    <div className="w-full py-20 px-6 relative z-10">
+      <AnimatePresence mode="wait">
+        {submitted ? (
+          <motion.div 
+            key="success"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="max-w-2xl mx-auto bg-slate-900/40 backdrop-blur-2xl p-12 rounded-[3rem] border border-teal-500/20 text-center shadow-2xl"
+          >
+            <div className="w-24 h-24 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(45,212,191,0.1)]">
+              <CheckCircle2 size={48} />
+            </div>
+            <h2 className="text-4xl font-black text-white mb-4 tracking-tighter uppercase">Message Reçu !</h2>
+            <p className="text-slate-400 mb-10 text-lg">
+              Merci, votre message a bien été transmis.<br />
+              Je reviens vers vous sur <span className="text-teal-400 font-bold">{senderEmail}</span> très prochainement.
+            </p>
+            <button 
+              onClick={() => setSubmitted(false)}
+              className="px-8 py-4 bg-white/5 hover:bg-white/10 text-teal-400 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border border-white/10"
             >
-              {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
-              {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />}
+              Envoyer un autre message
             </button>
-          </div>
-        </form>
+          </motion.div>
+        ) : (
+          <motion.div 
+            key="form"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            className="max-w-4xl mx-auto bg-slate-900/30 backdrop-blur-xl p-8 md:p-16 rounded-[3.5rem] border border-white/10 relative overflow-hidden shadow-2xl"
+          >
+            {/* Lueur d'arrière-plan */}
+            <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+            
+            <div className="text-center mb-16 relative z-10">
+              <span className="text-teal-400 text-[10px] font-black uppercase tracking-[0.6em] mb-4 block">
+                Collaboration
+              </span>
+              <h2 className="text-5xl md:text-6xl font-black text-white mb-6 tracking-tighter">
+                Démarrons un <span className="text-teal-400">Projet</span>
+              </h2>
+              <div className="h-1.5 w-12 bg-teal-500 mx-auto rounded-full mb-6"></div>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+              <input type="checkbox" name="botcheck" className="hidden" />
 
-        <p className="text-center mt-10 text-[10px] text-slate-400  tracking-widest">
-           Direct : <span className="text-slate-900 font-black">rnandrasanarivopierre@gmail.com</span>
-        </p>
-      </div>
+              {/* Champ Nom */}
+              <div className="flex flex-col group">
+                <label className="mb-3 ml-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Nom</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="Ex: Rakoto"
+                />
+              </div>
+
+              {/* Champ Prénom */}
+              <div className="flex flex-col group">
+                <label className="mb-3 ml-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Prénom</label>
+                <input
+                  type="text"
+                  name="firstname"
+                  className="px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="Ex: Pierre"
+                />
+              </div>
+
+              {/* Email */}
+              <div className="flex flex-col col-span-1 md:col-span-2 group">
+                <label className="mb-3 ml-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Adresse Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="px-6 py-5 rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="rakoto.pierre@exemple.com"
+                />
+              </div>
+
+              {/* Message */}
+              <div className="flex flex-col col-span-1 md:col-span-2 group">
+                <label className="mb-3 ml-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Votre Message</label>
+                <textarea
+                  name="message"
+                  required
+                  rows="5"
+                  className="px-6 py-5 rounded-[2rem] bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 resize-none transition-all duration-300 placeholder:text-slate-600"
+                  placeholder="Parlez-moi de vos besoins ou de votre idée..."
+                ></textarea>
+              </div>
+
+              {/* Bouton d'envoi */}
+              <div className="col-span-1 md:col-span-2 flex justify-center mt-4">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`group relative flex items-center justify-center gap-4 px-16 py-6 bg-teal-500 text-slate-950 text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl transition-all duration-500 shadow-[0_10px_40px_rgba(45,212,191,0.2)] ${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-teal-400 hover:-translate-y-1 hover:shadow-teal-400/40'
+                  }`}
+                >
+                  {isSubmitting ? "Initialisation..." : "Propulser le message"}
+                  {!isSubmitting && <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                </button>
+              </div>
+            </form>
+
+            <div className="mt-16 flex flex-col items-center gap-4">
+              <div className="h-px w-20 bg-white/10"></div>
+              <p className="flex items-center gap-3 text-[11px] text-slate-500 tracking-widest uppercase">
+                <Mail size={14} className="text-teal-500" />
+                <span className="text-white/80 font-bold">rnandrasanarivopierre@gmail.com</span>
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
