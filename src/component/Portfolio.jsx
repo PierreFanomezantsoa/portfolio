@@ -1,143 +1,158 @@
 import React from "react";
-import { Star, Code2, Cpu, Globe, Database, Terminal, Layers, Box } from "lucide-react";
 import { motion } from "framer-motion";
+import { 
+  SiReact, SiVuedotjs, SiNodedotjs, SiNestjs, 
+  SiSymfony, SiGit, SiDocker, SiTailwindcss, 
+  SiTypescript, SiPostgresql, SiGithub, SiAmazonwebservices,
+  SiVercel, SiFigma, SiGraphql, SiMongodb
+} from "react-icons/si";
+import { FaPaintBrush, FaServer, FaTools } from "react-icons/fa";
 
-const skills = [
-  { 
-    name: "React JS", 
-    level: 4, 
-    icon: <Layers />, 
-    description: "Architecture de composants complexes et gestion d'état avancée (Hooks, Context, Redux)." 
+// --- Configuration des données ---
+const skills = {
+  frontend: {
+    title: "Frontend",
+    icon: <FaPaintBrush />,
+    items: [
+      { name: "React / Next.js", percentage: 95, icon: <SiReact className="text-[#61DAFB]" /> },
+      { name: "Vue.js / Nuxt.js", percentage: 85, icon: <SiVuedotjs className="text-[#4FC08D]" /> },
+      { name: "TypeScript", percentage: 90, icon: <SiTypescript className="text-[#3178C6]" /> },
+      { name: "Tailwind CSS", percentage: 95, icon: <SiTailwindcss className="text-[#38B2AC]" /> },
+    ]
   },
-  { 
-    name: "Node JS", 
-    level: 4, 
-    icon: <Terminal />, 
-    description: "Construction d'environnements backend performants et scalables avec TypeScript." 
+  backend: {
+    title: "Backend",
+    icon: <FaServer />,
+    items: [
+      { name: "Node.js / Express", percentage: 90, icon: <SiNodedotjs className="text-[#339933]" /> },
+      { name: "NestJS / Symfony", percentage: 85, icon: <SiNestjs className="text-[#E0234E]" /> },
+      { name: "PostgreSQL / MongoDB", percentage: 85, icon: <SiPostgresql className="text-[#336791]" /> },
+      { name: "GraphQL / REST", percentage: 88, icon: <SiGraphql className="text-[#E10098]" /> },
+    ]
   },
-  { 
-    name: "Nest JS", 
-    level: 4, 
-    icon: <Box />, 
-    description: "Développement d'APIs modulaires et robustes suivant les principes SOLID." 
-  },
-  { 
-    name: "Symfony PHP", 
-    level: 3, 
-    icon: <Code2 />, 
-    description: "Maîtrise du framework MVC pour des applications métier structurées et sécurisées." 
-  },
-  { 
-    name: "Vue JS", 
-    level: 3, 
-    icon: <Globe />, 
-    description: "Création d'interfaces réactives et fluides avec l'écosystème Vue 3." 
-  },
-  { 
-    name: "Express JS", 
-    level: 3, 
-    icon: <Cpu />, 
-    description: "Conception de micro-services légers et de middlewares personnalisés." 
+  outils: {
+    title: "Outils",
+    icon: <FaTools />,
+    items: [
+      { name: "Git / GitHub", percentage: 95, icon: <SiGithub className="text-white" /> },
+      { name: "Docker / K8s", percentage: 75, icon: <SiDocker className="text-[#2496ED]" /> },
+      { name: "AWS / Vercel", percentage: 80, icon: <SiAmazonwebservices className="text-[#FF9900]" /> },
+      { name: "Figma / Design", percentage: 85, icon: <SiFigma className="text-[#F24E1E]" /> },
+    ]
   }
+};
+
+// --- Outils secondaires (Pills du bas) ---
+const toolsPills = [
+  { name: "Git", icon: <SiGit color="#F05032" /> },
+  { name: "Docker", icon: <SiDocker color="#2496ED" /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss color="#06B6D4" /> },
+  { name: "TypeScript", icon: <SiTypescript color="#3178C6" /> },
+  { name: "PostgreSQL", icon: <SiPostgresql color="#4169E1" /> },
 ];
 
-function SkillCard({ name, level, description, icon, index }) {
+// --- Sous-composants ---
+
+function SkillRow({ name, percentage, icon }) {
+  return (
+    <div className="mb-6 group/row">
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2">
+          <span className="text-lg opacity-70 group-hover/row:opacity-100 transition-opacity">{icon}</span>
+          <span className="text-zinc-200 font-medium text-sm group-hover/row:text-white transition-colors">{name}</span>
+        </div>
+        <span className="text-green-400 bg-gray-600 px-2 py-0.5 rounded text-xs font-bold font-mono">
+          {percentage}%
+        </span>
+      </div>
+      <div className="h-2 w-full bg-gray-600 rounded-full overflow-hidden">
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: `${percentage}%` }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="h-full bg-gradient-to-r from-green-600 to-green-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+        />
+      </div>
+    </div>
+  );
+}
+
+function CategoryCard({ data, index }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative bg-slate-900/40 backdrop-blur-xl rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 transition-all duration-500 border border-white/10 hover:border-teal-500/30 flex flex-col h-full shadow-2xl"
+      className="bg-slate-800 border border-white/5 rounded-[2.5rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] h-full hover:border-[#10b981]/30 transition-all duration-500"
     >
-      {/* Glow Effect arrière-plan icône - Discret sur mobile */}
-      <div className="absolute top-0 right-0 -mr-4 -mt-4 w-16 h-16 md:w-24 md:h-24 bg-teal-500/5 blur-2xl rounded-full group-hover:bg-teal-500/10 transition-colors"></div>
-      
-      {/* Icone et Titre */}
-      <div className="flex items-center gap-4 md:gap-5 mb-5 md:mb-6">
-        <div className="p-3 md:p-4 bg-white/5 rounded-xl md:rounded-2xl text-teal-400 group-hover:text-white group-hover:bg-teal-500 transition-all duration-500 shadow-inner">
-          {React.cloneElement(icon, { size: 20, className: "md:w-6 md:h-6" })}
+      <div className="flex items-center gap-4 mb-10">
+        <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center text-white text-xl shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+          {data.icon}
         </div>
-        <h3 className="text-lg md:text-xl font-bold text-white tracking-tight leading-tight">{name}</h3>
+        <h3 className="text-2xl font-bold text-white tracking-tight  underline decoration-[#10b981]/30 underline-offset-8">
+          {data.title}
+        </h3>
       </div>
 
-      <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8 font-medium">
-        {description}
-      </p>
-
-      {/* Expertise Section */}
-      <div className="mt-auto flex flex-col gap-3 md:gap-4">
-        <div className="flex items-center justify-between">
-          <span className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-black text-slate-500 group-hover:text-teal-400 transition-colors">
-            Niveau d'expertise
-          </span>
-          <span className="text-teal-400 text-[9px] md:text-[10px] font-bold">{level}/5</span>
-        </div>
-        
-        {/* Barre de maîtrise stylisée */}
-        <div className="flex gap-1 md:gap-1.5">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className={`h-1 md:h-1.5 flex-1 rounded-full transition-all duration-700 ${
-                i < level 
-                  ? "bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.3)] md:shadow-[0_0_12px_rgba(20,184,166,0.4)]" 
-                  : "bg-white/5"
-              }`}
-            />
-          ))}
-        </div>
+      <div>
+        {data.items.map((skill, idx) => (
+          <SkillRow key={idx} {...skill} />
+        ))}
       </div>
     </motion.div>
   );
 }
 
+// --- Composant Principal ---
 export default function SkillsSection() {
   return (
-    <div className="py-12 md:py-20 px-4 md:px-6 max-w-7xl mx-auto relative z-10">
-      
-      {/* Header */}
-      <div className="text-center mb-12 md:mb-20 relative px-2">
+    <section className="py-24 px-4 max-w-7xl mx-auto">
+      {/* En-tête */}
+      <div className="text-center mb-20">
         <motion.span 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-teal-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] mb-4 block"
+          className="text-green-500 text-xs font-bold uppercase tracking-[0.5em] mb-4 block"
         >
-          Stack Technique
+          Compétences Techniques
         </motion.span>
         <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-6xl font-black text-white tracking-tighter mb-4 md:mb-6 leading-tight"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="text-5xl md:text-7xl font-black text-white tracking-tighter"
         >
-          Compétences & <span className="text-teal-400">Expertise</span>
+          Mon <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-500">Expertise</span>
         </motion.h2>
-        <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-lg font-medium leading-relaxed opacity-80 italic">
-          Un arsenal technologique moderne pour transformer vos visions en produits digitaux d'exception.
-        </p>
       </div>
 
-      {/* Grille - 1 col mobile, 2 col tablette, 3 col desktop */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-        {skills.map((skill, i) => (
-          <SkillCard key={i} {...skill} index={i} />
+      {/* Grille de catégories */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+        {Object.entries(skills).map(([key, value], i) => (
+          <CategoryCard key={key} data={value} index={i} />
         ))}
       </div>
-      
-      {/* Outils secondaires - Optimisé pour le wrap mobile */}
-      <div className="mt-16 md:mt-24 flex flex-col items-center gap-6 md:gap-8 px-2">
-        <div className="h-px w-24 md:w-32 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-4xl">
-          {["Git • GitHub", "Docker", "Tailwind CSS", "Agile • Scrum", "TypeScript", "PostgreSQL", "Redis"].map((tool, index) => (
-            <span 
-              key={index} 
-              className="px-3 py-1.5 md:px-4 md:py-2 text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-widest bg-white/5 border border-white/5 rounded-full hover:text-teal-400 hover:border-teal-500/30 transition-all cursor-default"
-            >
-              {tool}
+
+      {/* Barre d'outils secondaire (Pills) */}
+      <div className="pt-12 border-t border-white/5 flex flex-wrap justify-center gap-4">
+        {toolsPills.map((tool, index) => (
+          <motion.div 
+            key={tool.name}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05 }}
+            whileHover={{ y: -5 }}
+            className="flex items-center gap-3 px-6 py-3 bg-slate-800 border border-white/5 rounded-full hover:border-[#10b981]/50 hover:bg-zinc-900 transition-all cursor-default group shadow-xl"
+          >
+            <div className="text-2xl opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all">
+              {tool.icon}
+            </div>
+            <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest group-hover:text-white transition-colors">
+              {tool.name}
             </span>
-          ))}
-        </div>
+          </motion.div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }

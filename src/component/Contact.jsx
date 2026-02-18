@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Mail } from 'lucide-react';
+import { Send, CheckCircle2, Mail, MapPin, Github, Linkedin, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function Contact() {
@@ -10,20 +10,15 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     const formData = new FormData(e.target);
-    const emailValue = formData.get("email");
-    setSenderEmail(emailValue);
-
+    setSenderEmail(formData.get("email"));
     formData.append("access_key", "be4625a4-d0b6-448b-ae59-b81684646fe9");
-    formData.append("subject", `Nouveau message de ${formData.get("email")}`);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
-
       if (response.ok) {
         setSubmitted(true);
         e.target.reset();
@@ -36,126 +31,108 @@ function Contact() {
   };
 
   return (
-    <div className="w-full py-12 md:py-20 px-4 md:px-6 relative z-10">
+    <div className="w-full py-12 md:py-24 px-4 md:px-8 overflow-hidden">
       <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div 
-            key="success"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="max-w-2xl mx-auto bg-slate-900/40 backdrop-blur-2xl p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-teal-500/20 text-center shadow-2xl"
+            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+            className="max-w-xl mx-auto bg-slate-900/40 backdrop-blur-xl p-8 rounded-[2.5rem] border border-green-500/30 text-center shadow-2xl"
           >
-            <div className="w-16 h-16 md:w-24 md:h-24 bg-teal-500/10 text-teal-400 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-[0_0_30px_rgba(45,212,191,0.1)]">
-              <CheckCircle2 className="w-8 h-8 md:w-12 md:h-12" />
-            </div>
-            <h2 className="text-2xl md:text-4xl font-black text-white mb-4 tracking-tighter uppercase">Message Reçu !</h2>
-            <p className="text-slate-400 mb-8 md:mb-10 text-sm md:text-lg">
-              Merci, votre message a bien été transmis.<br className="hidden md:block" />
-              Je reviens vers vous sur <span className="text-teal-400 font-bold">{senderEmail}</span> très prochainement.
+            <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto mb-6" />
+            <h2 className="text-2xl font-black text-white mb-4">Message Reçu !</h2>
+            <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+              Merci ! Je vous répondrai sur <span className="text-green-400 font-bold">{senderEmail}</span> sous peu.
             </p>
-            <button 
-              onClick={() => setSubmitted(false)}
-              className="w-full md:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-teal-400 rounded-xl md:rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border border-white/10"
-            >
-              Envoyer un autre message
-            </button>
+            <button onClick={() => setSubmitted(false)} className="px-8 py-3 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest transition-all">Retour</button>
           </motion.div>
         ) : (
           <motion.div 
-            key="form"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            className="max-w-4xl mx-auto bg-slate-900/30 backdrop-blur-xl p-6 md:p-16 rounded-[2rem] md:rounded-[3.5rem] border border-white/10 relative overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-6xl mx-auto"
           >
-            {/* Lueur d'arrière-plan - cachée sur petit mobile pour performance */}
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-teal-500/10 blur-[100px] rounded-full pointer-events-none hidden sm:block"></div>
-            
-            <div className="text-center mb-10 md:mb-16 relative z-10">
-              <span className="text-teal-400 text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] md:tracking-[0.6em] mb-3 block">
-                Collaboration
-              </span>
-              <h2 className="text-3xl md:text-6xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight">
-                Démarrons un <span className="text-teal-400">Projet</span>
-              </h2>
-              <div className="h-1 w-10 md:h-1.5 md:w-12 bg-teal-500 mx-auto rounded-full mb-4"></div>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 relative z-10">
-              <input type="checkbox" name="botcheck" className="hidden" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-start">
+              
+              {/* --- FORMULAIRE (Ordre 2 sur mobile pour laisser les infos visibles d'abord ou après selon ton choix, ici après) --- */}
+              <div className="lg:col-span-7 order-2 lg:order-1">
+                <div className="mb-10">
+                  <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+                    Parlons de votre <span className="text-green-500">Projet</span>
+                  </h2>
+                  <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] font-bold">Formulaire de contact</p>
+                </div>
 
-              {/* Champ Nom */}
-              <div className="flex flex-col group">
-                <label className="mb-2 ml-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Nom</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="px-5 py-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
-                  placeholder="Ex: Rakoto"
-                />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text" name="name" placeholder="Nom complet" required
+                      className="w-full px-6 py-4 rounded-2xl bg-slate-900/40 border border-white/10 text-white text-sm focus:border-green-500 outline-none transition-all placeholder:text-gray-600"
+                    />
+                    <input
+                      type="email" name="email" placeholder="Email" required
+                      className="w-full px-6 py-4 rounded-2xl bg-slate-900/40 border border-white/10 text-white text-sm focus:border-green-500 outline-none transition-all placeholder:text-gray-600"
+                    />
+                  </div>
+                  <textarea
+                    name="message" placeholder="Dites-moi tout..." required rows="5"
+                    className="w-full px-6 py-4 rounded-[2rem] bg-slate-900/40 border border-white/10 text-white text-sm focus:border-green-500 outline-none resize-none transition-all placeholder:text-gray-600"
+                  ></textarea>
+                  <button
+                    type="submit" disabled={isSubmitting}
+                    className="group w-full md:w-auto px-10 py-4 bg-green-600 hover:bg-green-500 text-white font-black uppercase text-[11px] tracking-widest rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-green-900/20"
+                  >
+                    {isSubmitting ? "Envoi..." : "Envoyer"}
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </form>
               </div>
 
-              {/* Champ Prénom */}
-              <div className="flex flex-col group">
-                <label className="mb-2 ml-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Prénom</label>
-                <input
-                  type="text"
-                  name="firstname"
-                  className="px-5 py-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
-                  placeholder="Ex: Pierre"
-                />
+              {/* --- INFORMATIONS (DROITE) --- */}
+              <div className="lg:col-span-5 order-1 lg:order-2">
+                {/* CONTENEUR DE LA LIGNE VERTICALE 
+                  'ml-4' sur mobile pour laisser de la place aux ronds à gauche de la ligne
+                */}
+                <div className="relative ml-4 lg:ml-12 pl-10 lg:pl-12 border-l-2 border-white/10 space-y-12 py-4">
+                  
+                  {/* Item 1 */}
+                  <div className="relative">
+                    {/* Le Bullet (Cercle) ancré sur la ligne */}
+                    <div className="absolute -left-[49px] lg:-left-[57px] top-1.5 w-4 h-4 rounded-full bg-[#020617] border-2 border-green-500 shadow-[0_0_10px_rgba(34,197,94,0.3)]" />
+                    <h4 className="text-[10px] font-black text-green-500 uppercase tracking-[0.2em] mb-2">Contact Direct</h4>
+                    <p className="text-white text-base md:text-lg font-medium break-all">
+                      rnandrasanarivopierre@gmail.com
+                    </p>
+                  </div>
+
+                  {/* Item 2 */}
+                  <div className="relative">
+                    <div className="absolute -left-[49px] lg:-left-[57px] top-1.5 w-4 h-4 rounded-full bg-[#020617] border-2 border-gray-600" />
+                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-2">Ma Zone</h4>
+                    <p className="text-white text-base md:text-lg font-medium">Antananarivo, Madagascar</p>
+                  </div>
+
+                  {/* Item 3 */}
+                  <div className="relative">
+                    <div className="absolute -left-[49px] lg:-left-[57px] top-1.5 w-4 h-4 rounded-full bg-[#020617] border-2 border-gray-600" />
+                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-2">Social</h4>
+                    <div className="flex gap-5 mt-4">
+                      <a href="#" className="p-2 bg-white/5 rounded-lg text-gray-400 hover:text-green-500 transition-colors"><Linkedin size={20} /></a>
+                      <a href="#" className="p-2 bg-white/5 rounded-lg text-gray-400 hover:text-green-500 transition-colors"><Github size={20} /></a>
+                    </div>
+                  </div>
+
+                  {/* Carte Statut */}
+                  <div className="relative mt-8 p-6 rounded-3xl bg-green-500/5 border border-green-500/10">
+                     <div className="flex items-center gap-2 mb-2">
+                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                        <span className="text-white text-xs font-bold uppercase tracking-widest">Disponible</span>
+                     </div>
+                     <p className="text-gray-400 text-[11px] leading-relaxed">
+                        Prêt pour de nouveaux défis créatifs et techniques.
+                     </p>
+                  </div>
+                </div>
               </div>
 
-              {/* Email */}
-              <div className="flex flex-col col-span-1 md:col-span-2 group">
-                <label className="mb-2 ml-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Adresse Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="px-5 py-4 md:px-6 md:py-5 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 transition-all duration-300 placeholder:text-slate-600"
-                  placeholder="rakoto.pierre@exemple.com"
-                />
-              </div>
-
-              {/* Message */}
-              <div className="flex flex-col col-span-1 md:col-span-2 group">
-                <label className="mb-2 ml-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-500 group-focus-within:text-teal-400 transition-colors">Votre Message</label>
-                <textarea
-                  name="message"
-                  required
-                  rows="4"
-                  className="px-5 py-4 md:px-6 md:py-5 rounded-[1.5rem] md:rounded-[2rem] bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500/50 resize-none transition-all duration-300 placeholder:text-slate-600"
-                  placeholder="Parlez-moi de votre idée..."
-                ></textarea>
-              </div>
-
-              {/* Bouton d'envoi */}
-              <div className="col-span-1 md:col-span-2 flex justify-center mt-2 md:mt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`group relative w-full md:w-auto flex items-center justify-center gap-4 px-10 md:px-16 py-5 md:py-6 bg-teal-500 text-slate-950 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] rounded-xl md:rounded-2xl transition-all duration-500 shadow-[0_10px_40px_rgba(45,212,191,0.2)] ${
-                    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-teal-400 hover:-translate-y-1 hover:shadow-teal-400/40'
-                  }`}
-                >
-                  {isSubmitting ? "Envoi..." : "Propulser le message"}
-                  {!isSubmitting && <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-                </button>
-              </div>
-            </form>
-
-            <div className="mt-12 md:mt-16 flex flex-col items-center gap-4">
-              <div className="h-px w-16 bg-white/10"></div>
-              <p className="flex flex-col md:flex-row items-center gap-2 md:gap-3 text-[9px] md:text-[11px] text-slate-500 tracking-widest uppercase text-center">
-                <span className="flex items-center gap-2">
-                  <Mail size={12} className="text-teal-500" />
-                  Email :
-                </span>
-                <span className="text-white/80 font-bold lowercase md:uppercase break-all">rnandrasanarivopierre@gmail.com</span>
-              </p>
             </div>
           </motion.div>
         )}

@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Vos imports d'images restent les mêmes
+// Tes imports d'images (conservés)
 import Note from "../img/notes.avif";
 import Inscription from "../img/inscription.webp";
 import Medicine from "../img/medicine.jpg";
@@ -12,153 +12,153 @@ import Kiosque from "../img/kiosque_num.webp";
 
 const projects = [
   {
-    name: "Système d'Inscription Étudiant",
-    description: "Conçu pour la Faculté DEGSS. Optimisé pour la saisie massive de données et le reporting administratif complexe.",
+    name: "Inscription Étudiant",
+    description: "Solution sur mesure pour la Faculté DEGSS. Architecture robuste optimisée.",
     image: Inscription,
     github: "https://github.com/PierreFanomezantsoa/projet_inscription.git",
-    tags: ["Vue JS", "Postgresql", "Node JS"],
+    tags: ["Vue JS", "Node JS"],
   },
   {
     name: "Gestionnaire de Notes",
-    description: "Système de gestion académique pour la Faculté EGS-MCI. Inclut le calcul des moyennes et des portails sécurisés.",
+    description: "Système académique centralisé pour EGS-MCI. Gestion automatisée.",
     image: Note,
     github: "https://github.com/PierreFanomezantsoa/gestionNotes.git",
     tags: ["React", "Node.js"],
   },
   {
-    name: "Passerelle Mobile Money",
-    description: "Simulation de passerelle de paiement sécurisée en Java. Gestion des journaux et chiffrement des données.",
+    name: "Mobile Money",
+    description: "Simulation d'échanges sécurisés en Java. Protocoles de chiffrement.",
     image: Payment,
     github: "https://github.com/ton-projet3",
-    tags: ["Java", "JSP", "MySQL"],
+    tags: ["Java", "MySQL"],
   },
   {
     name: "Logiciel de Medicines",
-    description: "Système d'inventaire complet avec alertes de stock intelligentes et analyses statistiques des ventes.",
+    description: "Gestion d'officine avec analyse prédictive des stocks en temps réel.",
     image: Medicine,
     github: "https://github.com/PierreFanomezantsoa/Medicines.git",
     tags: ["Vue.js", "Laravel"],
   },
   {
-    name: "Ordonnancement de tâches",
-    description: "Optimisation de ressources via des algorithmes complexes pour la gestion de projets industriels.",
+    name: "Ordonnancement",
+    description: "Algorithmique avancée pour l'optimisation des ressources complexes.",
     image: Avions,
     github: "https://github.com/PierreFanomezantsoa/ProjeROAffectation.git",
     tags: ["React Native", "Algo"],
   },
   {
-    name: "Kiosque d’Affichage Numérique",
-    description: "Application mobile connectée à une API NestJS pour la gestion dynamique de contenus multimédias.",
+    name: "Kiosque Numérique",
+    description: "Interface mobile dynamique connectée à NestJS pour diffusion multimédia.",
     image: Kiosque,
     github: "https://github.com/PierreFanomezantsoa/Front_kiosque.git",
     tags: ["React Native", "NestJS"],
   },
 ];
 
-export default function Experience() {
+export default function Portfolio() {
   return (
-    // Ajustement padding vertical : py-12 sur mobile, py-24 sur desktop
-    <div className="py-12 md:py-24 px-4 md:px-6 max-w-7xl mx-auto relative z-10 font-sans">
+    <div id="portfolio" className="py-20 md:py-28 px-4 md:px-10 max-w-7xl mx-auto relative z-10">
       
-      {/* Header - Plus compact sur mobile */}
-      <div className="flex flex-col items-center text-center mb-12 md:mb-20">
+      <div className="flex flex-col items-center text-center mb-16 md:mb-20">
         <motion.span 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-teal-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] mb-4 bg-teal-400/10 px-4 py-2 rounded-full border border-teal-400/20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-green-400 text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block"
         >
-          Portfolio & Engineering
+          Engineering & Design
         </motion.span>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-6xl font-black text-white tracking-tight mb-4 md:mb-6 leading-tight"
+          className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-6 leading-tight"
         >
-          Mes <span className="text-teal-400">Réalisations</span>
+          Mes <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500">Projets</span>
         </motion.h2>
+        <div className="h-1.5 w-14 bg-green-500/20 rounded-full"></div>
       </div>
 
-      {/* Grid - Écart réduit sur mobile (gap-6 vs gap-8) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
         {projects.map((project, i) => (
           <motion.div
             key={i}
-            // Hover effet désactivé sur mobile pour une meilleure UX tactile
-            whileHover={window.innerWidth > 768 ? { y: -8 } : {}}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="group relative flex flex-col rounded-[1.5rem] md:rounded-[2rem] overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-md hover:border-teal-500/30 transition-all duration-300"
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            // CHANGEMENT : Fond Zinc-950 (presque noir mat) pour trancher avec le bleu nuit du background
+            className="group relative flex flex-col aspect-[3/4.2]
+              rounded-[2.5rem] overflow-hidden border border-white/5 bg-slate-800 hover:border-green-500/50 transition-all duration-500 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]"
           >
-            {/* Image Section - Hauteur adaptative */}
-            <div className="relative h-44 sm:h-48 w-full overflow-hidden p-2 md:p-3">
-              <div className="relative h-full w-full overflow-hidden rounded-[1.2rem] md:rounded-[1.5rem]">
+            {/* Image Container */}
+            <div className="relative h-[48%] w-full overflow-hidden p-4">
+              <div className="relative h-full w-full overflow-hidden rounded-[2rem] shadow-2xl">
                 <img
                   src={project.image}
                   alt={project.name}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 brightness-[0.8]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60" />
                 
-                {/* Bouton GitHub plus accessible sur mobile */}
+                {/* Overlay dégradé discret */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/60 via-transparent to-transparent" />
+                
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute top-2 right-2 md:top-3 md:right-3 p-3 bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-xl text-white active:scale-90 md:hover:bg-teal-400 md:hover:text-slate-900 transition-all z-10"
+                  className="absolute top-4 right-4 p-3 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-2xl text-white hover:bg-green-500 hover:text-zinc-950 transition-all duration-300 z-20"
                 >
-                  <Github size={18} />
+                  <Github size={20} />
                 </a>
               </div>
             </div>
 
-            {/* Content Section */}
-            <div className="px-5 md:px-6 pb-6 pt-2 flex flex-col flex-grow"> 
-              {/* Tags - Wrappés correctement pour les petits écrans */}
-              <div className="flex gap-2 mb-3 flex-wrap">
+            {/* Corps de la carte */}
+            <div className="px-8 pb-10 pt-2 flex flex-col flex-grow"> 
+              <div className="flex gap-2 mb-5 flex-wrap">
                 {project.tags?.map((tag, index) => (
                   <span
                     key={index}
-                    className="text-[8px] md:text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 md:px-2.5 md:py-1 bg-teal-400/5 text-teal-400/80 rounded border border-teal-400/10"
+                    className="text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 bg-slate-800 text-green-400 rounded-lg border border-white/5 group-hover:border-green-500/30 transition-all"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:group-hover:text-teal-400 transition-colors">
+              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors duration-300 tracking-tight">
                 {project.name}
               </h3>
 
-              <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 line-clamp-3 md:line-clamp-none">
+              <p className="text-white/80 text-sm leading-relaxed mb-6 font-normal line-clamp-3 group-hover:text-zinc-400 transition-colors">
                 {project.description}
               </p>
 
-              {/* Action Footer - Toujours collé au bas de la carte */}
-              <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+              {/* Footer de carte */}
+              <div className="mt-auto pt-6 border-t border-white/5 flex justify-between items-center">
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-300 active:text-teal-400 md:hover:text-teal-400 transition-all"
+                  className="group/btn flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-white transition-all"
                 >
-                  Explorer le code
-                  <ArrowUpRight size={14} />
+                  Détails
+                  <ArrowUpRight size={16} className="text-green-500 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                 </a>
-                <div className="w-1.5 h-1.5 rounded-full bg-teal-500/40 group-hover:bg-teal-400 group-hover:shadow-[0_0_8px_#2dd4bf] transition-all" />
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(20,184,166,0.8)]" />
               </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Signature */}
-      <div className="mt-16 md:mt-24 text-center opacity-30">
-        <p className="text-slate-500 text-[8px] md:text-[9px] font-bold tracking-[0.3em] md:tracking-[0.4em] uppercase">
-          Curated Works • Nandrasanarivo Pierre • 2026
-        </p>
+      {/* Signature Mat */}
+      <div className="mt-16 text-center">
+        <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full border border-white/5 bg-slate-800 shadow-2xl">
+           <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(20,184,166,0.5)]"></span>
+           <p className="text-white/80 text-[10px] font-bold tracking-[0.4em] uppercase">
+             Disponible 2026 • Madagascar
+           </p>
+        </div>
       </div>
     </div>
   );
