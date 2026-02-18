@@ -74,7 +74,7 @@ function Footer() {
         {/* Barre de Footer Basse */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
-            <p className="text-white text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-black italic">
+            <p className="text-white text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] font-black ">
               © {currentYear} <span className="text-green-500">PIERRE NANDRASANARIVO</span>
             </p>
             <div className="flex items-center gap-2 text-slate-500 text-[8px] md:text-[9px] font-bold uppercase tracking-widest">

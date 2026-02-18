@@ -84,7 +84,7 @@ function CategoryCard({ data, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="bg-slate-800 border border-white/5 rounded-[2.5rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] h-full hover:border-[#10b981]/30 transition-all duration-500"
+      className="bg-slate-800 border border-white/5 rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] h-full hover:border-[#10b981]/30 transition-all duration-500"
     >
       <div className="flex items-center gap-4 mb-10">
         <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center text-white text-xl shadow-[0_0_20px_rgba(16,185,129,0.2)]">

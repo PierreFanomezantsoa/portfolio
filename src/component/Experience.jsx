@@ -85,40 +85,37 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            // CHANGEMENT : Fond Zinc-950 (presque noir mat) pour trancher avec le bleu nuit du background
             className="group relative flex flex-col aspect-[3/4.2]
-              rounded-[2.5rem] overflow-hidden border border-white/5 bg-slate-800 hover:border-green-500/50 transition-all duration-500 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]"
+              rounded-[1rem] overflow-hidden border border-white/5 bg-slate-800 hover:border-green-500/50 transition-all duration-500 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]"
           >
-            {/* Image Container */}
-            <div className="relative h-[48%] w-full overflow-hidden p-4">
-              <div className="relative h-full w-full overflow-hidden rounded-[2rem] shadow-2xl">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 brightness-[0.8]"
-                />
-                
-                {/* Overlay dégradé discret */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/60 via-transparent to-transparent" />
-                
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-4 right-4 p-3 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-2xl text-white hover:bg-green-500 hover:text-zinc-950 transition-all duration-300 z-20"
-                >
-                  <Github size={20} />
-                </a>
-              </div>
+            {/* Image Container - MODIFIÉ : Pas de padding, bordures collées en haut/gauche/droite */}
+            <div className="relative h-[48%] w-full overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 brightness-[0.8]"
+              />
+              
+              {/* Overlay dégradé plus naturel vers le bas */}
+              <div className="absolute inset-0 " />
+              
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-4 right-4 p-3 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-2xl text-white hover:bg-green-500 hover:text-zinc-950 transition-all duration-300 z-20"
+              >
+                <Github size={18} />
+              </a>
             </div>
 
             {/* Corps de la carte */}
-            <div className="px-8 pb-10 pt-2 flex flex-col flex-grow"> 
+            <div className="px-8 pb-8 pt-6 flex flex-col flex-grow"> 
               <div className="flex gap-2 mb-5 flex-wrap">
                 {project.tags?.map((tag, index) => (
                   <span
                     key={index}
-                    className="text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 bg-slate-800 text-green-400 rounded-lg border border-white/5 group-hover:border-green-500/30 transition-all"
+                    className="text-[9px] uppercase tracking-widest font-bold px-3 py-1.5 bg-slate-700/50 text-green-400 rounded-lg border border-white/5 group-hover:border-green-500/30 transition-all"
                   >
                     {tag}
                   </span>
@@ -129,7 +126,7 @@ export default function Portfolio() {
                 {project.name}
               </h3>
 
-              <p className="text-white/80 text-sm leading-relaxed mb-6 font-normal line-clamp-3 group-hover:text-zinc-400 transition-colors">
+              <p className="text-white/70 text-sm leading-relaxed mb-6 font-normal line-clamp-3 group-hover:text-white/90 transition-colors">
                 {project.description}
               </p>
 
